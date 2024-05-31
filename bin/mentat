@@ -1,0 +1,28 @@
+#!/bin/bash
+
+APPDIR=$(readlink -f $0)
+APPDIR=$(dirname "$APPDIR")
+APPDIR=$(dirname "$APPDIR")
+
+# Load ~/.gitconfig into the container if it exists
+# Introduce a variable as this is not possible directly with docker compose
+#
+# It's also possible to manually configure gitconfig:
+# Load a custom .gitconfig when running mentat
+# $ GITCONFIG=/path/to/.gitconfig /path/to/bin/mentat
+#
+# Ignore an existing ~/.gitconfig
+# $ GITCONFIG= /path/to/bin/mentat
+if [ -z ${GITCONFIG+x} ]; then
+  if [ -f ~/.gitconfig ]; then
+    GITCONFIG=~/.gitconfig
+  fi
+fi
+
+# Load ~/.mentat/.mentat_config into the container if it exists
+# Introduce a variable as this is not possible directly with docker compose
+if [ -f ~/.mentat/.mentat_config.json ]; then
+  MENTAT_CONFIG=~/.mentat/.mentat_config.json
+fi
+
+GITCONFIG=$GITCONFIG MENTAT_CONFIG=$MENTAT_CONFIG docker compose -f $APPDIR/docker-compose.yml run --rm mentat

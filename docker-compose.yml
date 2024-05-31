@@ -1,0 +1,16 @@
+services:
+  mentat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - $PWD:/home/workingdir
+      # Load ~/.gitconfig if it exists or a custom git config file (see ./bin/mentat)
+      - ${GITCONFIG:-/dev/null}:/root/.gitconfig:ro
+      # Load ~/.mentat/.mentat_config.json if it exists (see ./bin/mentat)
+      - ${MENTAT_CONFIG:-/dev/null}:/root/.mentat/.mentat_config.json:ro
+    stdin_open: true
+    tty: true
+    working_dir: /home/workingdir
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
