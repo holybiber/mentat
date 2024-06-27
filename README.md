@@ -26,7 +26,7 @@ By default mentat will make commits with the same git name as if you would make 
 In the command line: Go into the directory containing the code you want to work on with Mentat. Start the wrapper script `bin/mentat` - if you created the symlink you just need to type `mentat`. Mentat will spin up and you can ask your questions. No files are automatically added to the context because context would quickly get large (queries can get more expensive) / too large - add the files/folders you want to have as context with `/include ...`. See the [Mentat Readme](https://github.com/AbanteAI/mentat) for further information and introduction videos
 
 ## Explanations
-`Dockerfile`: The container is based on Debian and is also available on Docker Hub: [holybiber/mentat](https://hub.docker.com/repository/docker/holybiber/mentat/general). I decided for Debian to make it easier to integrate Firefox / Chromium in the future.
+`Dockerfile`: The container is based on Debian and is also available on Docker Hub: [holybiber/mentat](https://hub.docker.com/r/holybiber/mentat). I decided for Debian to make it easier to integrate Firefox / Chromium in the future.
 
 `docker-compose.yml`: Docker compose setup, make git and mentat configuration available to the container
 
